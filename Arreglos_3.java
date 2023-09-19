@@ -2,66 +2,56 @@ import java.util.Scanner;
 
 public class Arreglos_3 {
   public static void main(String[] args) {
-    //* Declaracion_Variables */
+    // * Declaracion_Variables */
     Scanner scanner = new Scanner(System.in);
-    int cantidadNotas;
 
-    //*Solicitud de informacion */
+    // *Solicitud de informacion */
     System.out.println("Ingrese su nombre");
     String nombre = scanner.nextLine();
 
-    System.out.println("Ingrese la materia");
-    String materia = scanner.nextLine();
+    System.out.println("Ingrese el numero de materias");
+    int cantidadMaterias = scanner.nextInt();
 
-    System.out.println("Ingrese la cantidad de notas");
-    cantidadNotas = scanner.nextInt();
+    System.out.println("Ingrese la cantidad de notas para cada materia");
+    int cantidadNotas = scanner.nextInt();
 
-    //*Inicio de arreglos */
-    double[] notas = new double[cantidadNotas];
-    double[] porcentajes = new double[cantidadNotas];
+    // *Inicio de arreglos */
+    double[][] notas = new double[cantidadMaterias][cantidadNotas];
+    double[][] porcentajes = new double[cantidadMaterias][cantidadNotas];
+    double[] promedios = new double[cantidadMaterias];
+    String[] materias = new String[cantidadMaterias];
 
-    //*Ciclo para ingresar las notas y porcentajes */
-    for (int i = 0; i < cantidadNotas; i++) {
+    // *Ciclo para ingresar las notas y porcentajes */
+    for (int i = 0; i < cantidadMaterias; i++) {
 
-      System.out.println("Ingrese la nota " + (i + 1));
-      notas[i] = scanner.nextDouble();
+      System.out.println("Ingrese la materia " + (i + 1));
+      materias[i] = scanner.next();
 
-      System.out.println("Ingrese el % de la nota " + (i + 1));
-      porcentajes[i] = scanner.nextDouble();
+      for (int x = 0; x < cantidadNotas; x++) {
+        System.out.println("Ingrese la nota " + (x + 1));
+        notas[i][x] = scanner.nextDouble();
 
-    }
+        System.out.println("Ingrese el porcentaje desde 0 hasta 100 de la nota " + (x + 1));
+        porcentajes[i][x] = scanner.nextDouble();
 
-    //*Mensaje con los datos del usuario */
-    System.out.println("Hola " + nombre + " Tus notas en " + materia + " son:");
-
-    //*Ciclo para imprimir las notas */
-    for (int i = 0; i < cantidadNotas; i++) {
-      System.out.println(notas[i]);
-
-    }
-
-    //*Ciclo para imprimir los porcentajes */
-    System.out.println("Los porcentajes de las notas son: ");
-    for (int i = 0; i < cantidadNotas; i++) {
-
-      System.out.println(porcentajes[i]);
+      }
 
     }
 
-    //* Ciclo sumatoria de notas y porcentajes */
-    double sumatoriaNotas = 0;
-    double sumatoriaPorcentajes = 0;
+    // *Calculo de los promedios */
 
-    for (int i = 0; i < cantidadNotas; i++) {
-      sumatoriaNotas += notas[i];
-      sumatoriaPorcentajes += porcentajes[i];
+    for (int i = 0; i < cantidadMaterias; i++) {
+      double sumatoriaNotas = 0;
+      double sumatoriaPromedios = 0;
+      for (int n = 0; n < cantidadNotas; n++) {
+        sumatoriaNotas += notas[i][n];
+        sumatoriaPromedios += porcentajes[i][n];
+      }
 
-    } 
-
-    //* Impresion de operaciones para el promedio */
-    System.out.println("Tu promedio es " + (sumatoriaNotas * (sumatoriaPorcentajes / 100)) / cantidadNotas);
+      promedios[i] = ((sumatoriaNotas * (sumatoriaPromedios / 100)) / cantidadNotas);
+      System.out.println("El promedio es de la materia " + materias[i] + " es: " + promedios[i]);
+    }
 
     scanner.close();
-
   }
 }
