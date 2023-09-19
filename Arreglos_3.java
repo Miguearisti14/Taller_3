@@ -38,7 +38,7 @@ public class Arreglos_3 {
 
     }
 
-    // *Calculo de los promedios */
+    // *Sumatoria de las notas y porcentajes y calculo de los promedios */
 
     for (int i = 0; i < cantidadMaterias; i++) {
       double sumatoriaNotas = 0;
